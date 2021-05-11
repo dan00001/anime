@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewexport" contents="width=device-width, initial-scale=1.0">
+    <title>AnimeThor</title>
+    <link rel = "stylesheet" href="style.css">
+        
+</head>
+<body>
+    <section>
+        <div class ="container">
+        <h1 class ="firstRow">AnimeThor</h1>
+        <label>Search for your favourite anime</label>
+        <form>
+            
+          <input type ="text" placeholder="Search here...">
+          <ion-icon name="search"></ion-icon>
+
+        </form>
+        <div>
+            <label>Add a new Anime</label>
+            <h1>Name:</h1>
+            <input type ="text" name="nameAnime" id="nameAnime" placeholder="Add a name...">
+            <h1>No of episodes:</h1>
+            <input type ="number" name="numberEp" id="numberEp" min="1" placeholder="Add the No of episodes...">
+            <h1>Short Story :</h1>
+            <textarea name="storyAnime" id="storyAnime" rows="5" cols="40" type ="text" placeholder="Add a short story..."></textarea>
+           <div class="wrapper">
+               <textarea name="newAnimes" id="newAnimes" rows="7" cols="60" type ="text"></textarea>
+  <button type="button" id="button" onclick="addAnime()">
+    <span>Save</span>
+    <div class="success">
+    <svg xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  viewBox="0 0 29.756 29.756" style="enable-background:new 0 0 29.756 29.756;" xml:space="preserve">
+      
+	<path d="M29.049,5.009L28.19,4.151c-0.943-0.945-2.488-0.945-3.434,0L10.172,18.737l-5.175-5.173   c-0.943-0.944-2.489-0.944-3.432,0.001l-0.858,0.857c-0.943,0.944-0.943,2.489,0,3.433l7.744,7.752   c0.944,0.943,2.489,0.943,3.433,0L29.049,8.442C29.991,7.498,29.991,5.953,29.049,5.009z"/>
+ </svg>
+      </div>
+  </button>
+</div>
+        </div>
+        <div class="result">
+           
+        </div>
+        </div> 
+         </section>
+         <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+        <script type ="text/javascript">
+            window.onload = function(){
+                 const searchResultDiv = document.querySelector(".result");
+            const container = document.querySelector(".container");
+             const searchForm = document.querySelector("form");
+               let searchQuery= '';
+                searchForm.addEventListener("submit", (e) => {
+                  e.preventDefault();
+                  searchQuery = e.target.querySelector("input").value;
+                 fetchAPI();
+});
+async function generateHTML(results) {
+  container.classList.remove("initial");
+  let generatedHTML = "";
+  results.map((result) => {
+    generatedHTML += `
+      <div class="item">
+        <img src="${result.image_url}" alt="img">
+        <div class="flex-container">
+          <h1 class="title">${result.title}</h1>
+          <a class="infoButton" target="_blank" href="${
+            result.url
+          }">More info</a>
+        </div>
+        <p class="item-data">No of episodes: ${result.episodes}</p>
+         <p class="item-data">Airing: ${result.airing}</p>
+        
+          <p class="item-data">Short Story: ${result.synopsis}</p>
+      </div>
+    `;
+  });
+  searchResultDiv.innerHTML = generatedHTML;
+}
+async function fetchAPI() {
+  const baseURL =`https://api.jikan.moe/v3/search/anime?q=${searchQuery}`; 
+  const response = await window.fetch(baseURL);
+  const data = await response.json();
+  generateHTML(data.results);
+  console.log(data);
+}
+            }
+           
+
+    function addAnime(){
+  var nameAnime = document.getElementById("nameAnime").value;
+  var numberEp = document.getElementById("numberEp").value;
+  var storyAnime = document.getElementById("storyAnime").value;
+  if(nameAnime !== null && numberEp !== null && storyAnime !== null){
+  var result = document.getElementById("newAnimes").innerHTML +="Name: "+nameAnime+"\n"+"Episodes: "+numberEp+"\n"+"Story: "+storyAnime+"\n"+"\n";
+    return result;
+  }
+    }
+        </script>   
+    </body>
+
+</html>
