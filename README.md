@@ -185,3 +185,18 @@ Pornirea aplicatiei de React
 npm start
 ```
 ![image](https://user-images.githubusercontent.com/83885403/117858159-422cc180-b296-11eb-91c5-9ebf8de5920a.png)
+
+## Capturi Aplicatie
+URL
+```bash
+https://animethor.azurewebsites.net/
+```
+Meniul principal
+![image](https://user-images.githubusercontent.com/83885403/117863108-16143f00-b29c-11eb-81be-a6456a53e243.png)
+
+Rezultat cautare anime
+![image](https://user-images.githubusercontent.com/83885403/117863268-41972980-b29c-11eb-8d66-1337bc128daf.png)
+
+Adaugarea unui anime nou
+![image](https://user-images.githubusercontent.com/83885403/117863393-668b9c80-b29c-11eb-92d9-1aeb42a16ee9.png)
+
